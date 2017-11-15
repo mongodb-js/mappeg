@@ -1,0 +1,12 @@
+{
+  "name": "aggregation-syntax-parser",
+  "version": "0.0.0",
+  "description": "Aggregation Pipeline Syntax Parser",
+  "repository": "http://github.com/mongodb-js/aggregation-syntax-parser",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Durran Jordan <durran@gmail.com>",
+  "license": "Apache-2.0"
+}
