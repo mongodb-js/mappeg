@@ -5,8 +5,20 @@
   "repository": "http://github.com/mongodb-js/aggregation-syntax-parser",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "ci": "npm run check && npm test",
+    "test": "mocha --recursive",
+    "fmt": "mongodb-js-fmt ./*.js ./test/*.js",
+    "compile": "npm run pegjs",
+    "pegjs": "pegjs -o ./lib/parser.js < ./src/aggregation.pegjs",
+    "check": "mongodb-js-precommit ./src ./test",
+    "prepublish": "npm run compile",
+    "pretest": "npm run compile"
   },
   "author": "Durran Jordan <durran@gmail.com>",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "pegjs": "^0.10.0"
+  }
 }
