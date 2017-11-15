@@ -5,7 +5,7 @@ describe('parser', () => {
   describe('#parse', () => {
     context('when the stage is empty', () => {
       context('when both open/close brackets exist', () => {
-        it('parses the empty stage', () => {
+        it('returns the empty ast', () => {
           expect(parser.parse('{}')).to.deep.equal(['{', '}']);
         });
       });
