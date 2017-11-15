@@ -1,9 +1,9 @@
 {
-  "name": "@mongodb-js/aggregation-syntax-parser",
+  "name": "@mongodb-js/mappeg",
   "version": "0.0.0",
-  "description": "Aggregation Pipeline Syntax Parser",
+  "description": "MongoDB Aggregation Pipeline Parsing Expression Grammar",
   "author": "Durran Jordan <durran@gmail.com>",
-  "repository": "http://github.com/mongodb-js/aggregation-syntax-parser",
+  "repository": "http://github.com/mongodb-js/mappeg",
   "main": "index.js",
   "scripts": {
     "ci": "npm run check && npm test",
