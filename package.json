@@ -1,5 +1,5 @@
 {
-  "name": "aggregation-syntax-parser",
+  "name": "@mongodb-js/aggregation-syntax-parser",
   "version": "0.0.0",
   "description": "Aggregation Pipeline Syntax Parser",
   "author": "Durran Jordan <durran@gmail.com>",
