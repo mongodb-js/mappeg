@@ -2,6 +2,7 @@
   "name": "aggregation-syntax-parser",
   "version": "0.0.0",
   "description": "Aggregation Pipeline Syntax Parser",
+  "author": "Durran Jordan <durran@gmail.com>",
   "repository": "http://github.com/mongodb-js/aggregation-syntax-parser",
   "main": "index.js",
   "scripts": {
@@ -14,11 +15,18 @@
     "prepublish": "npm run compile",
     "pretest": "npm run compile"
   },
+  "precommit": [
+    "check"
+  ],
   "author": "Durran Jordan <durran@gmail.com>",
   "license": "Apache-2.0",
   "devDependencies": {
     "chai": "^4.1.2",
+    "eslint-config-mongodb-js": "^2.2.0",
     "mocha": "^4.0.1",
-    "pegjs": "^0.10.0"
+    "mongodb-js-fmt": "^0.0.3",
+    "mongodb-js-precommit": "^0.2.9",
+    "pegjs": "^0.10.0",
+    "pre-commit": "^1.1.2"
   }
 }
