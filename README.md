@@ -1,4 +1,4 @@
-# aggregation-syntax-parser [![][travis_img]][travis_url] [![][npm_img]][npm_url]
+# aggregation-syntax-parser [![][travis_img]][travis_url]
 
 ## License
 
