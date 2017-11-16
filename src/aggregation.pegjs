@@ -1,18 +1,28 @@
 stage
-  = begin_object exp:expression end_object
-    { return { expression: exp } }
+  = begin_object stage:stage_operation? end_object
+    { return { stage: stage } }
 
-expression
-  = (
-      quote op:operator quote name_separator arg:argument
-      { return { operator: op, argument: arg } }
-    )?
+stage_operation
+  = coll_stats
 
-argument
- = "{}"
+coll_stats
+  = quote
+    "$collStats"
+    quote
+    name_separator
+    begin_object
+    (latency_stats / storage_stats)?
+    end_object
+    { return { operator: "$collStats", argument: "{}" } }
 
-operator
-  = "$collStats"
+latency_stats
+  = quote "latencyStats" quote name_separator latency_stats_options
+
+latency_stats_options
+  = begin_object end_object
+
+storage_stats
+  = quote "storageStats" quote name_separator begin_object end_object
 
 begin_object
   = _ "{" _
@@ -23,6 +33,11 @@ end_object
 _ "whitespace"
   = [ \t\n\r ]*
 
-quote = '"' / "'"
+quote
+  = '"' / "'"
 
-name_separator = _ ":" _
+name_separator
+  = _ ":" _
+
+boolean
+  = "true" / "false"

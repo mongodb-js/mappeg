@@ -7,20 +7,20 @@ describe('parser', () => {
       context('when both open/close brackets exist', () => {
         context('when no whitespace exists', () => {
           it('returns the ast', () => {
-            expect(parser.parse('{}')).to.deep.equal({ expression: null });
+            expect(parser.parse('{}')).to.deep.equal({ stage: null });
           });
         });
 
         context('when whitespace exists', () => {
           context('when there is a single character of whitespace', () => {
             it('returns the ast', () => {
-              expect(parser.parse('{ }')).to.deep.equal({ expression: null });
+              expect(parser.parse('{ }')).to.deep.equal({ stage: null });
             });
           });
 
           context('when there are multiple characters of whitespace', () => {
             it('returns the ast', () => {
-              expect(parser.parse(' {   } ')).to.deep.equal({ expression: null });
+              expect(parser.parse(' {   } ')).to.deep.equal({ stage: null });
             });
           });
         });
@@ -56,7 +56,7 @@ describe('parser', () => {
         context('when the operator is double quoted', () => {
           it('returns the ast', () => {
             expect(parser.parse('{ "$collStats": {}}')).to.deep.equal({
-              expression: {
+              stage: {
                 operator: '$collStats',
                 argument: '{}'
               }
@@ -67,7 +67,7 @@ describe('parser', () => {
         context('when the operator is single quoted', () => {
           it('returns the ast', () => {
             expect(parser.parse("{ '$collStats': {}}")).to.deep.equal({
-              expression: {
+              stage: {
                 operator: '$collStats',
                 argument: '{}'
               }
@@ -76,7 +76,18 @@ describe('parser', () => {
         });
       });
 
-      context('when latency stats is provided', () => {
+      context('when latencyStats is provided', () => {
+        context('when latencyStats is empty', () => {
+          it('returns the ast', () => {
+            expect(parser.parse("{ '$collStats': { 'latencyStats': {}}}")).to.deep.equal({
+              stage: {
+                operator: '$collStats',
+                argument: '{}'
+              }
+            });
+          });
+        });
+
         context('when histogram is a boolean', () => {
 
         });
