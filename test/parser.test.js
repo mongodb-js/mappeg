@@ -7,20 +7,20 @@ describe('parser', () => {
       context('when both open/close brackets exist', () => {
         context('when no whitespace exists', () => {
           it('returns the ast', () => {
-            expect(parser.parse('{}')).to.deep.equal({ expression: {}});
+            expect(parser.parse('{}')).to.deep.equal({ expression: null });
           });
         });
 
         context('when whitespace exists', () => {
           context('when there is a single character of whitespace', () => {
             it('returns the ast', () => {
-              expect(parser.parse('{ }')).to.deep.equal({ expression: {}});
+              expect(parser.parse('{ }')).to.deep.equal({ expression: null });
             });
           });
 
           context('when there are multiple characters of whitespace', () => {
             it('returns the ast', () => {
-              expect(parser.parse(' {   } ')).to.deep.equal({ expression: {}});
+              expect(parser.parse(' {   } ')).to.deep.equal({ expression: null });
             });
           });
         });
@@ -29,7 +29,7 @@ describe('parser', () => {
       context('when only an open bracket exists', () => {
         it('raises a syntax error', () => {
           expect(() => { parser.parse('{'); }).
-            to.throw('Expected "}" but end of input found.');
+            to.throw('Expected "\'", "\\"", or "}" but end of input found.');
         });
       });
 
@@ -45,6 +45,42 @@ describe('parser', () => {
           expect(() => { parser.parse(''); }).
             to.throw('Expected "{" but end of input found.');
         });
+      });
+    });
+
+    /**
+     * https://docs.mongodb.com/manual/reference/operator/aggregation/collStats/#pipe._S_collStats
+     */
+    context('when the stage operator is $collStats @3.4.0', () => {
+      context('when no options are provided', () => {
+        context('when the operator is double quoted', () => {
+          it('returns the ast', () => {
+            expect(parser.parse('{ "$collStats": {}}')).to.deep.equal({
+              expression: {
+                operator: '$collStats',
+                argument: '{}'
+              }
+            });
+          });
+        });
+
+        context('when the operator is single quoted', () => {
+
+        });
+      });
+
+      context('when latency stats is provided', () => {
+        context('when histogram is a boolean', () => {
+
+        });
+
+        context('when histogram is not a boolean', () => {
+
+        });
+      });
+
+      context('when storage stats is provided', () => {
+
       });
     });
   });
