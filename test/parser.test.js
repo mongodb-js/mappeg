@@ -65,7 +65,14 @@ describe('parser', () => {
         });
 
         context('when the operator is single quoted', () => {
-
+          it('returns the ast', () => {
+            expect(parser.parse("{ '$collStats': {}}")).to.deep.equal({
+              expression: {
+                operator: '$collStats',
+                argument: '{}'
+              }
+            });
+          });
         });
       });
 
